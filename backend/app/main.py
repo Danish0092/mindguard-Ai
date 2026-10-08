@@ -4,13 +4,16 @@ import app.models
 
 from app.db.database import engine
 from app.api.auth import router as auth_router
-
+from app.api.conversations import router as conversations_router
+from app.api.messages import router as messages_router
 app = FastAPI(
     title="MindGuard AI API",
     description="Backend API for MindGuard AI",
     version="1.0.0",
 )
 app.include_router(auth_router)
+app.include_router(conversations_router)
+app.include_router(messages_router)
 
 
 @app.get("/health")
