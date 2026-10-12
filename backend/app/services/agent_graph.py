@@ -73,15 +73,15 @@ def route_after_screening(state: MindGuardState) -> str:
     return "crisis_response" if state["flagged"] else "conversation"
 
 
-builder = StateGraph(MindGuardState)
+graph = StateGraph(MindGuardState)
 
-builder.add_node("crisis_screening", crisis_screening_node)
-builder.add_node("crisis_response", crisis_response_node)
-builder.add_node("conversation", conversation_node)
+graph.add_node("crisis_screening", crisis_screening_node)
+graph.add_node("crisis_response", crisis_response_node)
+graph.add_node("conversation", conversation_node)
 
-builder.add_edge(START, "crisis_screening")
+graph.add_edge(START, "crisis_screening")
 
-builder.add_conditional_edges(
+graph.add_conditional_edges(
     "crisis_screening",
     route_after_screening,
     {
@@ -90,7 +90,7 @@ builder.add_conditional_edges(
     },
 )
 
-builder.add_edge("crisis_response", END)
-builder.add_edge("conversation", END)
+graph.add_edge("crisis_response", END)
+graph.add_edge("conversation", END)
 
-mindguard_graph = builder.compile()
+mindguard_graph = graph.compile()
