@@ -91,7 +91,7 @@ class AgentOutput(Base):
         RiskTier,
         name="risk_tier",
         values_callable=lambda enum_class: [
-            item.value for item in enum_class
+            item.value.upper() for item in enum_class
         ],
         create_type=False,
     ),

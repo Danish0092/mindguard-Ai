@@ -1,9 +1,9 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 import uuid
 
 from sqlalchemy import Boolean, DateTime, Enum, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from app.db.database import Base
@@ -117,11 +117,6 @@ class User(Base):
     back_populates="student",
 )
 
-    assigned_cases = relationship(
-    "Escalation",
-    foreign_keys="Escalation.counselor_id",
-    back_populates="counselor",
-)
     assigned_cases = relationship(
     "Escalation",
     foreign_keys="Escalation.counselor_id",
